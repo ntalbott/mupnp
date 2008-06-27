@@ -1,0 +1,13 @@
+= UPnP
+
+The gem is based on the work of Thomas Bernard, miniupnp library
+(http://miniupnp.free.fr/). The source code and his license can be
+found in the ext directory.
+The windows version will be made as long as
+i have some volounteer that can provide me the precompiled code for
+windows. The library is in the module called MiniUPnP, in it you can
+find all the library functions.
+The module UPnP is a wrapper that simplify the access to the
+underlaying library.
+The interface was automatically built with swig (http://www.swig.org/),
+the interface file is upnp.i
