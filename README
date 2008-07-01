@@ -1,4 +1,6 @@
 = UPnP
+Author:: Dario Meloni (mailto:mellon85@gmail.com)
+License:: LGPL
 
 The gem is based on the work of Thomas Bernard, miniupnp library
 (http://miniupnp.free.fr/). The source code and his license can be

@@ -1,10 +1,11 @@
 #! /usr/bin/ruby
-# Author: Dario Meloni <mellon85@gmail.com>
-#
 # This module is a binding to the Thomas Bernard miniupnp library
 # written in C.  It supports the IGD specification and works with IPv4
 # only.  Every exception that comes from inside the library is report as
 # UPnPException while wrong arguments are returned as ArgumentError.
+#
+# Author:: Dario Meloni (mailto:mellon85@gmail.com)
+# License:: LGPL
 
 require 'MiniUPnP'
 include ObjectSpace
