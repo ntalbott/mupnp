@@ -32,12 +32,6 @@
 #include "minixml.h"
 #include "upnpcommands.h"
 
-/* Uncomment the following to transmit the msearch from the same port
- * as the UPnP multicast port. With WinXP this seems to result in the
- * responses to the msearch being lost, thus if things dont work then
- * comment this out. */
-/* #define TX_FROM_UPNP_PORT */
-
 #ifdef WIN32
 #define PRINT_SOCKET_ERROR(x)    printf("Socket error: %s, %d\n", x, WSAGetLastError());
 #else
@@ -344,7 +338,7 @@ parseMSEARCHReply(const char * reply, int size,
  * It is up to the caller to free the chained list
  * delay is in millisecond (poll) */
 struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
-                              const char * minissdpdsock)
+                              const char * minissdpdsock, int sameport)
 {
 	struct UPNPDev * tmp;
 	struct UPNPDev * devlist = 0;
@@ -397,9 +391,8 @@ struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
     /* reception */
     memset(&sockudp_r, 0, sizeof(struct sockaddr_in));
     sockudp_r.sin_family = AF_INET;
-#ifdef TX_FROM_UPNP_PORT
-    sockudp_r.sin_port = htons(PORT);
-#endif
+    if (sameport) 
+        sockudp_r.sin_port = htons(PORT);
     sockudp_r.sin_addr.s_addr = INADDR_ANY;
     /* emission */
     memset(&sockudp_w, 0, sizeof(struct sockaddr_in));

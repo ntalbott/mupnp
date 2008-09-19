@@ -41,7 +41,7 @@ struct UPNPDev {
  * If multicastif is not NULL, it will be used instead of the default
  * multicast interface for sending SSDP discover packets. */
 LIBSPEC struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
-                                      const char * minissdpdsock);
+                                      const char * minissdpdsock, int sameport);
 /* freeUPNPDevlist()
  * free list returned by upnpDiscover() */
 LIBSPEC void freeUPNPDevlist(struct UPNPDev * devlist);

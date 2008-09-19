@@ -82,7 +82,11 @@ module UPnP
         # on the background to scan the network.  All the other
         # functions are safe to be called in the meanwhile, they will
         # just wait for the scan to end before operating.
-        def initialize(autodiscover=true,max_wait=1000)
+        # The variable sameport if set to true will receive UPnP answers from
+        # the incoming port. It can be usefull with some routers.  Try with
+        # false, and if it fails try again with true if the firewall allows
+        # only UPnP ports.
+        def initialize(autodiscover=true,sameport=true,max_wait=1000)
             if max_wait <= 0 then
                 raise ArgumentError, "Max wait time must be >= 1."
             end
@@ -94,6 +98,9 @@ module UPnP
             # start the discover process at the object initialization.
             # until ruby2, this thread will block the ruby environment
             # for the wait time.
+            
+            @sameport = sameport
+
             if autodiscover then
                 @igd_thread = Thread.new { discoverIGD }
             else
@@ -116,7 +123,9 @@ module UPnP
             if max_wait_time <= 0 then
                 raise ArgumentError, "Max wait time must be >= 1"
             end
-            @list = MiniUPnP.upnpDiscover(max_wait_time,nil,nil)
+            sameport = 0
+            sameport = 1 if @sameport != false
+            @list = MiniUPnP.upnpDiscover(max_wait_time,nil,nil,sameport)
             if @list == nil then
                 raise UPnPException.new,"No UPNP Device Found"
             end
