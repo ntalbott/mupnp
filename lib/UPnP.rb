@@ -179,7 +179,7 @@ module UPnP
                 uptime_uint = MiniUPnP.new_uintp()
                 r = MiniUPnP.UPNP_GetStatusInfo(@urls.controlURL,
                            @data.servicetype, status, uptime_uint,
-                           lastconnerror) != 0
+                           lastconnerror)
                 if r != 0 then
                     raise UPnPException.new, "Error while retriving status info. #{code2error(r)}."
                 end
