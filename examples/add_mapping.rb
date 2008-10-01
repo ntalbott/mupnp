@@ -40,8 +40,10 @@ begin
     u.addPortMapping(nport,lport,protocol,desc)
 rescue UPnP::UPnPException
     puts "UPnP Exception occourred #{$!}"
+    exit 3
 rescue 
     puts "#{$!}"
+    exit 4
 end
 
 puts "Mapped #{nport} to #{lport}"
