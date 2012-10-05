@@ -2,6 +2,5 @@ ext/*.o
 ext/*.so
 ext/*.bundle
 ext/*.dll
-rdoc
-pkg
-*.swp
+ext/Makefile
+*.gem
